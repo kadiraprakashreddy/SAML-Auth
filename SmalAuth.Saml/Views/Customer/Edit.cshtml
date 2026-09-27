@@ -1,0 +1,10 @@
+@{
+    ViewBag.Title = "Customer " + ViewBag.CustomerId;
+}
+
+<h1>Customer @ViewBag.CustomerId</h1>
+<p>
+    You asked for this URL before login. After Entra returned the SAML assertion,
+    the ACS used RelayState to send you back here.
+</p>
+<p><a href="@Url.Action("Index", "Home")">View SAML user</a></p>

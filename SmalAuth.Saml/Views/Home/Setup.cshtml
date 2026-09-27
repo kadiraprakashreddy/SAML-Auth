@@ -1,0 +1,20 @@
+@{
+    ViewBag.Title = "SAML setup";
+}
+
+<h1>SAML setup</h1>
+<p>POC #2 is waiting for the Entra tenant values from the office email. Replace <code>YOUR-TENANT-ID</code> in <code>SmalAuth.Saml\Web.config</code>.</p>
+
+<dl>
+    <dt>SP Entity ID</dt>
+    <dd>@SmalAuth.Saml.SamlSettings.SpEntityId</dd>
+    <dt>ACS URL</dt>
+    <dd>@SmalAuth.Saml.SamlSettings.AcsUrl</dd>
+    <dt>Federation metadata</dt>
+    <dd>@SmalAuth.Saml.SamlSettings.MetadataUrl</dd>
+    <dt>Tenant ID</dt>
+    <dd>@SmalAuth.Saml.SamlSettings.TenantId</dd>
+</dl>
+
+<p>Register the Entity ID and ACS URL on the Entra Enterprise Application, then open a protected URL such as <a href="@Url.Action("Edit", "Customer", new { id = 12345 })">/Customer/Edit/12345</a>. That path is stored in RelayState and restored after the assertion is validated.</p>
+<p>RSA is not part of this spike.</p>

@@ -1,0 +1,37 @@
+@model SmalAuth.Models.WindowsUserInfo
+@{
+    ViewBag.Title = "Windows user";
+}
+
+<h1>Windows user</h1>
+<p>Signed in through IIS Windows Authentication with Negotiate/Kerberos.</p>
+
+<dl>
+    <dt>User</dt>
+    <dd>@Model.Name</dd>
+    <dt>Authentication type</dt>
+    <dd>@Model.AuthenticationType</dd>
+    <dt>Protocol</dt>
+    <dd>@Model.Protocol</dd>
+    <dt>Authenticated</dt>
+    <dd>@Model.IsAuthenticated</dd>
+    <dt>Windows identity</dt>
+    <dd>@Model.IsWindowsIdentity</dd>
+    <dt>Impersonation</dt>
+    <dd>@(string.IsNullOrEmpty(Model.ImpersonationLevel) ? "n/a" : Model.ImpersonationLevel)</dd>
+</dl>
+
+<h2>Groups</h2>
+@if (Model.Groups != null && Model.Groups.Count > 0)
+{
+    <ul>
+        @foreach (var group in Model.Groups)
+        {
+            <li>@group</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No group information was available.</p>
+}

@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmalAuth", "SmalAuth\SmalAuth.csproj", "{8F3D2A1B-4C5E-6789-A0B1-C2D3E4F50617}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmalAuth.Saml", "SmalAuth.Saml\SmalAuth.Saml.csproj", "{C4E91B70-2A18-4F55-9D33-7B6E1A0C8E44}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F3D2A1B-4C5E-6789-A0B1-C2D3E4F50617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3D2A1B-4C5E-6789-A0B1-C2D3E4F50617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3D2A1B-4C5E-6789-A0B1-C2D3E4F50617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3D2A1B-4C5E-6789-A0B1-C2D3E4F50617}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4E91B70-2A18-4F55-9D33-7B6E1A0C8E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E91B70-2A18-4F55-9D33-7B6E1A0C8E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E91B70-2A18-4F55-9D33-7B6E1A0C8E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E91B70-2A18-4F55-9D33-7B6E1A0C8E44}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

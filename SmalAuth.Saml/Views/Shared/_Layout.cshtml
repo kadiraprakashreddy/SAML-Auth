@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <p class="nav">
+        <a href="@Url.Action("Index", "Home")">User</a>
+        <a href="@Url.Action("Edit", "Customer", new { id = 12345 })">Customer 12345</a>
+        <a href="@Url.Content("~/Saml2/Logout")">Sign out</a>
+    </p>
+    @RenderBody()
+</body>
+</html>
