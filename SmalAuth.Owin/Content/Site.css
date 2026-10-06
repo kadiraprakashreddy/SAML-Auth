@@ -1,0 +1,39 @@
+body {
+    margin: 2rem auto;
+    max-width: 52rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #1b1b1b;
+    line-height: 1.45;
+}
+
+.nav a {
+    margin-right: 1rem;
+}
+
+h1, h2 {
+    font-weight: 600;
+}
+
+dt {
+    margin-top: 0.75rem;
+    color: #555;
+    font-size: 0.85rem;
+}
+
+dd {
+    margin: 0.15rem 0 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.35rem 0.5rem 0.35rem 0;
+    border-bottom: 1px solid #ddd;
+    word-break: break-all;
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  DUMMY IdP metadata for office laptop swap.
+  Replace this file with Azure Dev IdP - Web Plus Localhost Dev.xml from the team.
+  Then set identityProviders entityId in Web.config to the entityID attribute on EntityDescriptor.
+  The real Entra file must include IDPSSODescriptor (SAML), not only WS-Fed RoleDescriptor.
+-->
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+                  entityID="https://sts.windows.net/32761e73-fd53-4cfd-9dfe-946febf1aae4/">
+  <IDPSSODescriptor WantAuthnRequestsSigned="false"
+                    protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <KeyDescriptor use="signing">
+      <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <X509Data>
+          <X509Certificate>MIIDKjCCAhKgAwIBAgIQdeMvDbgg679M+uPk/SCItTANBgkqhkiG9w0BAQsFADAoMSYwJAYDVQQDDB1TbWFsQXV0aCBEdW1teSBJZFAgRE8tTk9ULVVTRTAeFw0yNjEwMDYxMTUyMjNaFw0zMTEwMDYxMjAyMjNaMCgxJjAkBgNVBAMMHVNtYWxBdXRoIER1bW15IElkUCBETy1OT1QtVVNFMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1bnmV0CpXGhfsXCI6cHPHqbuFl+d4MnPHBIjyFDrOV8jVStyrSQvLmFII4/QkspKEXcMwkd9Fgpr4cMkRpEOLWDsnc/t25S0lSZHe+QJXX/MbviKhEvljpqCpcK2YPPWbopSo8hblx8ZTMv1kHmt1P4mdIWE2YGUD2zgEdR736WSH3bcID2hThL7ytKmwalK+lkKuXjqE8cW2AzHu41PzIQyHoB9opPk6F6PbHS5oP4Y95GTfUDB0vLNA5BcTnFfBiJhPR65ykWiOvNLSGLWzsdNIZzWUenpynMCpOyX683/0goI8e2dt2DlkwmKSuyuS7TI9SHfKaEwGRMOiZy4cQIDAQABo1AwTjAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMB0GA1UdDgQWBBTMnpluJjnwJWZSpHPzhfr4qbJN3TANBgkqhkiG9w0BAQsFAAOCAQEAT+JxXj4APcSdkpTsSxXodR7zTgtrHcdgEDWLh2o0ibi4aniNQ5/BaYiaoMireHS/Zt0K7HP7PcLgVNoiPQTxTjw74l/EaWAT9bqePE0i1UDPq4wRgJB9BP0oPwLZBebeFPNIVAJIL1455SvZppjdqBfUS5t2ulvwBfK1vZsM7Q2R1JoJNHkbDyEduB1MkpaVUkEu65vxbAY/igmkQTWdzVa9xmR9D+t14OJaxDRAX9reF7bf7QGmOtj4bnGeD1b1SfTMyZwhmrmuNWIcfCXkSEaL5fQ1nzcLWT4W4ilJLM8P9m3oM4RJO/iozTTNC94cKUNMNdJdyf6KjwtPcaT/xw==</X509Certificate>
+        </X509Data>
+      </KeyInfo>
+    </KeyDescriptor>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                         Location="https://login.microsoftonline.com/32761e73-fd53-4cfd-9dfe-946febf1aae4/saml2" />
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                         Location="https://login.microsoftonline.com/32761e73-fd53-4cfd-9dfe-946febf1aae4/saml2" />
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                         Location="https://login.microsoftonline.com/32761e73-fd53-4cfd-9dfe-946febf1aae4/saml2" />
+  </IDPSSODescriptor>
+</EntityDescriptor>

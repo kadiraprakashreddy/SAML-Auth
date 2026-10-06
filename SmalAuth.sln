@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmalAuth", "SmalAuth\SmalAu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmalAuth.Saml", "SmalAuth.Saml\SmalAuth.Saml.csproj", "{C4E91B70-2A18-4F55-9D33-7B6E1A0C8E44}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmalAuth.Owin", "SmalAuth.Owin\SmalAuth.Owin.csproj", "{9D4E8B21-6A70-4F3C-9E11-2C8A7B5D0F44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{C4E91B70-2A18-4F55-9D33-7B6E1A0C8E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4E91B70-2A18-4F55-9D33-7B6E1A0C8E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4E91B70-2A18-4F55-9D33-7B6E1A0C8E44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D4E8B21-6A70-4F3C-9E11-2C8A7B5D0F44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D4E8B21-6A70-4F3C-9E11-2C8A7B5D0F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D4E8B21-6A70-4F3C-9E11-2C8A7B5D0F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D4E8B21-6A70-4F3C-9E11-2C8A7B5D0F44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

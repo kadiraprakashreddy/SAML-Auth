@@ -1,0 +1,19 @@
+@{
+    ViewBag.Title = "SAML setup";
+}
+
+<h1>SAML setup</h1>
+<p>This OWIN sample loads IdP metadata from <code>&lt;sustainsys.saml2&gt;</code> in <code>SmalAuth.Owin\Web.config</code>.</p>
+
+<dl>
+    <dt>SP Entity ID</dt>
+    <dd>@SmalAuth.Owin.SamlSettings.SpEntityId</dd>
+    <dt>ACS URL</dt>
+    <dd>@SmalAuth.Owin.SamlSettings.AcsUrl</dd>
+    <dt>Federation metadata</dt>
+    <dd>@SmalAuth.Owin.SamlSettings.MetadataUrl</dd>
+    <dt>Tenant ID</dt>
+    <dd>@SmalAuth.Owin.SamlSettings.TenantId</dd>
+</dl>
+
+<p>Register the Entity ID and ACS URL on the Entra Enterprise Application, then open <a href="@Url.Action("Edit", "Customer", new { id = 12345 })">/Customer/Edit/12345</a> to prove RelayState.</p>
