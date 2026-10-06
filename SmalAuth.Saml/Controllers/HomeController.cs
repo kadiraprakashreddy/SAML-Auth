@@ -5,7 +5,6 @@ using SmalAuth.Saml.Models;
 
 namespace SmalAuth.Saml.Controllers
 {
-    [SamlAuthorize]
     public class HomeController : Controller
     {
         [AllowAnonymous]

@@ -144,21 +144,34 @@ routes.MapRoute(
 );
 ```
 
-### Step 5. Replace `[Authorize]` with a SAML challenge
+### Step 5. Make SAML authentication global
 
-`[Authorize]` alone would send users to a forms login that no longer exists. `SamlAuthorizeAttribute` does this instead:
+Do **not** put `[SamlAuthorize]` on every controller. For a 400-page app such as WebPlus, register it once as a global MVC filter. Pages are protected by default. Only mark genuine public endpoints with `[AllowAnonymous]`.
 
-1. If there is no session, take the current URL (`/Customer/Edit/12345`)
-2. Redirect to `/Saml2/SignIn?ReturnUrl=/Customer/Edit/12345`
-3. Sustainsys puts that ReturnUrl into SAML **RelayState**
-4. After ACS validates the assertion, the user is sent back to that URL
+In `FilterConfig.cs`:
 
-Protect controllers with `[SamlAuthorize]`:
+```csharp
+public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+{
+    filters.Add(new HandleErrorAttribute());
+    filters.Add(new SamlAuthorizeAttribute());
+}
+```
 
-- `HomeController` — user / claims page
-- `CustomerController.Edit` — deep-link page used to prove RelayState
+`Global.asax` already calls `FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters)` during `Application_Start`.
 
-`/Home/Setup` is `[AllowAnonymous]` so the app can show missing Entra config.
+The attribute then:
+
+1. Skips `[AllowAnonymous]` actions and controllers
+2. Skips `/Saml2/SignIn`, `/Saml2/Acs`, `/Saml2/Logout`, and SP metadata so there is no redirect loop
+3. If there is no session, takes the current URL (`/Customer/Edit/12345`)
+4. Redirects to `/Saml2/SignIn?ReturnUrl=/Customer/Edit/12345`
+5. Sustainsys puts that ReturnUrl into SAML **RelayState**
+6. After ACS validates the assertion, the user is sent back to that URL
+
+`/Home/Setup` is `[AllowAnonymous]` so missing Entra config can still be shown. `Home/Index` and `Customer/Edit` have no attribute — the global filter protects them.
+
+Before enabling this on WebPlus, list the few endpoints that must stay public (health checks, error pages, integration callbacks) and mark only those `[AllowAnonymous]`.
 
 ### Step 6. Create the application session after ACS
 
@@ -219,8 +232,8 @@ AuthnRequests are not signed (`authenticateRequestSigningBehavior="Never"`), whi
 ## 5. Runtime request path
 
 1. User opens `https://localhost:44322/Customer/Edit/12345`.
-2. `CustomerController` is marked `[SamlAuthorize]`. No session cookie → not authenticated.
-3. `SamlAuthorizeAttribute` redirects to `/Saml2/SignIn?ReturnUrl=%2FCustomer%2FEdit%2F12345`.
+2. The global `SamlAuthorizeAttribute` filter runs. No session cookie → not authenticated.
+3. The filter redirects to `/Saml2/SignIn?ReturnUrl=%2FCustomer%2FEdit%2F12345`.
 4. Sustainsys builds a SAML AuthnRequest and redirects the browser to `login.microsoftonline.com/{tenant}/saml2?SAMLRequest=...&RelayState=...`.
 5. Entra authenticates the user and applies MFA if Conditional Access requires it.
 6. Entra POSTs the SAML Response to `https://localhost:44322/Saml2/Acs`.
@@ -259,7 +272,8 @@ The original Windows-auth app remains at [http://localhost:5000/](http://localho
 | File | Role |
 | --- | --- |
 | `SmalAuth.Saml\Web.config` | Turns off Windows Auth; Entra / Sustainsys / session cookie |
-| `SmalAuth.Saml\App_Start\SamlAuthorizeAttribute.cs` | Challenge + RelayState / ReturnUrl |
+| `SmalAuth.Saml\App_Start\SamlAuthorizeAttribute.cs` | Global challenge + RelayState / ReturnUrl |
+| `SmalAuth.Saml\App_Start\FilterConfig.cs` | Registers `SamlAuthorizeAttribute` once for the whole app |
 | `SmalAuth.Saml\App_Start\RouteConfig.cs` | `/Saml2/{action}` |
 | `SmalAuth.Saml\App_Start\SamlSettings.cs` | Reads tenant config; setup gate |
 | `SmalAuth.Saml\Controllers\HomeController.cs` | Claims page after SAML |
@@ -277,12 +291,13 @@ Use the same sequence on a production app such as WebPlus:
 2. Add Sustainsys.Saml2.Mvc and the `Saml2` route.
 3. Switch that environment’s IIS site to Anonymous on, Windows Auth off.
 4. Change `authentication mode` from `Windows` to `None`.
-5. Replace `[Authorize]` (or `<deny users="?" />` at IIS) with a SAML challenge that passes ReturnUrl.
-6. Register the real SP Entity ID and ACS URL in Entra (not localhost).
-7. Point Sustainsys at the Entra federation metadata.
-8. Map the signed-in user from NameID / Azure object ID instead of `DOMAIN\user`.
+5. Register `SamlAuthorizeAttribute` as a **global** filter. Do not stamp it on 400 controllers.
+6. Mark only legitimate public endpoints `[AllowAnonymous]`. Leave `/Saml2/*` unchallenged.
+7. Register the real SP Entity ID and ACS URL in Entra (not localhost).
+8. Point Sustainsys at the Entra federation metadata.
 9. Confirm a deep link (`/Customer/Edit/12345` or the real WebPlus URL) returns to the same path after ACS.
-10. Add RSA later only if it is still required after Entra MFA.
+10. Search remaining `WindowsIdentity` / `DOMAIN\user` usage and map Azure ID → the existing WebPlus user.
+11. Add RSA later only if it is still required after Entra MFA.
 
 ---
 
